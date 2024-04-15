@@ -1,7 +1,9 @@
+import { HeroParallax } from "@/components/global/connect-parallax";
 import { ContainerScroll } from "@/components/global/container-scroll-animation";
+import { InfiniteMovingCards } from "@/components/global/infinite-moving-cards";
 import Navbar from "@/components/global/navbar";
 import { Button } from "@/components/ui/button";
-import { clients } from "@/lib/constant";
+import { clients, products } from "@/lib/constant";
 import { dividerClasses } from "@mui/material";
 import Image from "next/image";
 
@@ -29,12 +31,15 @@ export default function Home() {
           ></ContainerScroll>
         </div>
       </section> 
-      <InfiniteMovingCards 
+      <InfiniteMovingCards
         className="md:mt-[18rem] mt-[-100px]"
         items={clients}
-        direction = "right"
+        direction="right"
         speed="slow"
       />
+      <section>
+        <HeroParallax products={products}></HeroParallax>
+      </section>
     </main>
   );
 }
