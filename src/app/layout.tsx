@@ -5,8 +5,8 @@ import { ThemeProvider } from "@/providers/theme-provider";
 const font = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Fuzzie",
-  description: "Fuzzie streamlines tasks and enhances productivity through automation and tailored assistance",
+  title: "IntelliAutoBuild",
+  description: "IntelliAutoBuild streamlines tasks and enhances productivity through automation and tailored assistance",
 };
 
 export default function RootLayout({

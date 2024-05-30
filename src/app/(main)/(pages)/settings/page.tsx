@@ -1,10 +1,24 @@
 import ProfileForm from '@/components/forms/proflie-form'
 import React from 'react'
 import ProfilePicture from './_components/profile-picture'
+import { db } from '@/lib/db'
 
 type Props = {}
 
 const Settings = (props: Props) => {
+  const removeProfileImage = async ()=>{
+    'use server'
+    const response = await db.user.update({
+      where : {
+        clerkId : authUser.id,
+      }
+      data : {
+        profileImage : '',
+      
+      },
+    })
+    return response
+  }
   return (
     <div className='flex flex-col gap-4'>
         <h1 className='sticky top-0 z-[10] flex items-center
