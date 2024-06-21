@@ -6,19 +6,19 @@ import { db } from '@/lib/db'
 type Props = {}
 
 const Settings = (props: Props) => {
-  const removeProfileImage = async ()=>{
-    'use server'
-    const response = await db.user.update({
-      where : {
-        clerkId : authUser.id,
-      }
-      data : {
-        profileImage : '',
+  // const removeProfileImage = async ()=>{
+  //   'use server'
+  //   const response = await db.user.update({
+  //     where : {
+  //       clerkId : authUser.id,
+  //     }
+  //     data : {
+  //       profileImage : '',
       
-      },
-    })
-    return response
-  }
+  //     },
+  //   })
+  //   return response
+  // }
   return (
     <div className='flex flex-col gap-4'>
         <h1 className='sticky top-0 z-[10] flex items-center
@@ -31,11 +31,11 @@ const Settings = (props: Props) => {
                 Add or update your information
             </p>
         </div>
-        <ProfilePicture
+        {/* <ProfilePicture
         onDelete={removeProfileImage}
         userImage={user?.profileImage || ''}
         onUpload={uploadProfileImage}
-        ></ProfilePicture>
+        ></ProfilePicture> */}
         <ProfileForm />
     </div>
   )
