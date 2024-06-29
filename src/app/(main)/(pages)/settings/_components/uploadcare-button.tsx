@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react'
 import * as LR from '@uploadcare/blocks'
 import { useRouter } from 'next/navigation'
+import { any } from 'zod'
 
 type Props = {
   onUpload: (e: string) => any
@@ -11,9 +12,7 @@ LR.registerBlocks(LR)
 
 const UploadCareButton = ({ onUpload }: Props) => {
   const router = useRouter()
-  const ctxProviderRef = useRef<
-    typeof LR.UploadCtxProvider.prototype & LR.UploadCtxProvider
-  >(null)
+  const ctxProviderRef = useRef< any | typeof LR.UploadCtxProvider.prototype & LR.UploadCtxProvider >(null)
 
   useEffect(() => {
     const handleUpload = async (e: any) => {
@@ -22,11 +21,11 @@ const UploadCareButton = ({ onUpload }: Props) => {
         router.refresh()
       }
     }
-    ctxProviderRef.current?.addEventListener('file-upload-success', handleUpload)
+    ctxProviderRef.current.addEventListener('file-upload-success', handleUpload)
   }, [])
 
   return (
-    <div className='transform transition-transform scale-50'>
+    <div>
       <lr-config
         ctx-name="my-uploader"
         pubkey="a9428ff5ff90ae7a64eb"
