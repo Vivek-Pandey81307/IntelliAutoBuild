@@ -26,7 +26,7 @@ const UploadCareButton = ({ onUpload }: Props) => {
   }, [])
 
   return (
-    <div>
+    <div className='transform transition-transform scale-50'>
       <lr-config
         ctx-name="my-uploader"
         pubkey="a9428ff5ff90ae7a64eb"
