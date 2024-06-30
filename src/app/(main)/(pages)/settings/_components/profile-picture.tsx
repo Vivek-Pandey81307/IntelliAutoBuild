@@ -11,7 +11,7 @@ import '@uploadcare/react-uploader/core.css';
 type Props = {
   userImage: string | null
   onDelete?: any
-  onUpload: any
+  onUpload?: any
 }
 
 const ProfilePicture = ({ userImage, onDelete, onUpload }: Props) => {
@@ -45,7 +45,7 @@ const ProfilePicture = ({ userImage, onDelete, onUpload }: Props) => {
             </Button>
           </>
         ) : (
-          <FileUploaderRegular pubkey="ed4090b17a4d0cfb429a" />)}
+          <FileUploaderRegular pubkey="ed4090b17a4d0cfb429a" onUploadClick={onUpload} />)}
       </div>
     </div>
   )
