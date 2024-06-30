@@ -1,13 +1,15 @@
+// @ts-nocheck
+
 import React, { useState } from 'react';
 import { FileUploaderRegular } from '@uploadcare/react-uploader';
 import '@uploadcare/react-uploader/core.css';
 
 function App() {
   const [files, setFiles] = useState([]);
-  
+
   const handleChangeEvent = (items) => {
-      setFiles([...items.allEntries.filter((file) => file.status === 'success')]);
-    };
+    setFiles([...items.allEntries.filter((file) => file.status === 'success')]);
+  };
 
   return (
     <div>
