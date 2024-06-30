@@ -5,13 +5,11 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { X } from 'lucide-react'
-import { FileUploaderRegular } from '@uploadcare/react-uploader';
-import '@uploadcare/react-uploader/core.css';
 
 type Props = {
   userImage: string | null
   onDelete?: any
-  onUpload?: any
+  onUpload: any
 }
 
 const ProfilePicture = ({ userImage, onDelete, onUpload }: Props) => {
@@ -45,7 +43,8 @@ const ProfilePicture = ({ userImage, onDelete, onUpload }: Props) => {
             </Button>
           </>
         ) : (
-          <FileUploaderRegular pubkey="ed4090b17a4d0cfb429a" onUploadClick={onUpload} />)}
+          <UploadCareButton onUpload={onUpload} />
+        )}
       </div>
     </div>
   )
