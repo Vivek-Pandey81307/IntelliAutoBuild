@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FileUploaderRegular } from '@uploadcare/react-uploader';
 import '@uploadcare/react-uploader/core.css';
 
-function App() {
+function UploadCareButton() {
   const [files, setFiles] = useState([]);
   
   const handleChangeEvent = (items) => {
@@ -28,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default UploadCareButton;

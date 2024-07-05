@@ -44,7 +44,7 @@ const ProfilePicture = ({ userImage, onDelete, onUpload }: Props) => {
             </Button>
           </>
         ) : (
-          <FileUploaderRegular pubkey="ed4090b17a4d0cfb429a" />
+          <UploadCareButton />
         )}
       </div>
     </div>
