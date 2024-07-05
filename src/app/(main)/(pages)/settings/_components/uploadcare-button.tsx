@@ -6,14 +6,15 @@ import { boolean } from 'zod';
 
 function UploadCareButton() {
   const [files, setFiles] = useState([]);
-  let b =1;
+  // const [b,setB] = useState(true);
   const handleChangeEvent = (items) => {
-      setFiles([...items.allEntries.filter((file) => file.status === 'success')]);b=0;
+       setFiles([...items.allEntries.filter((file) => file.status === 'success')])
+      // setB(false);
     };
 
   return (
     <div>
-      {b && <FileUploaderRegular onChange={handleChangeEvent} pubkey="ed4090b17a4d0cfb429a" />}
+      {<FileUploaderRegular onChange={handleChangeEvent} pubkey="ed4090b17a4d0cfb429a" />}
 
       <div>
         {files.map((file) => (

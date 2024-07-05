@@ -29,6 +29,19 @@ const Settings = async(props: Props) => {
       where :{ clerkId  : authUser.id},
       data :{profileImage : image},
     })
+    return response
+  }
+  
+  const updateUserInfo = async(name : string) =>{
+    'use server'
+    const updateUser = await db.user.update({
+      where : {
+        clerkId : authUser.id,
+      },data : {
+        name,
+      },
+    })
+    return updateUser
   }
   return (
     <div className='flex flex-col gap-4'>
@@ -47,7 +60,12 @@ const Settings = async(props: Props) => {
         userImage={user?.profileImage || ''}
         onUpload={uploadProfileImage}
         />
-        <ProfileForm />
+        <ProfileForm 
+        user = {user}
+        onUpdate = {updateUserInfo}
+        />
+        
+
     </div>
   )
 }
