@@ -4,6 +4,7 @@ import { EditorActions, EditorNodeType } from '@/lib/types';
 import {
     Dispatch,
     createContext,
+    use,
     useContext,
     useEffect,
     useReducer
@@ -74,31 +75,73 @@ const editorReducer = (state: EditorState = initialState, action: EditorActions)
             }
             return state
 
-        
-        case 'UNDO' : 
-            if (state.history.currentIndex > 0){
-                const prevIndex  = state.history.currentIndex -1 ;
-                const prevEditorState = {...state.history.history[prevIndex]}
+
+        case 'UNDO':
+            if (state.history.currentIndex > 0) {
+                const prevIndex = state.history.currentIndex - 1;
+                const prevEditorState = { ...state.history.history[prevIndex] }
                 const undoState = {
-                    ...state ,
-                    editor : prevEditorState,
-                    history : {
+                    ...state,
+                    editor: prevEditorState,
+                    history: {
                         ...state.history,
-                        currentIndex : prevIndex,
+                        currentIndex: prevIndex,
                     }
                 }
-            }
-        
+                return undoState
+            }return state
+
         case 'LOAD_DATA':
             return {
                 ...state,
-                editor : {
+                editor: {
                     ...state.editor,
-                    elements  : action.payload.elements || initialEditorState.elements,
-                    edges : action.payload.edges,
+                    elements: action.payload.elements || initialEditorState.elements,
+                    edges: action.payload.edges,
+                }
+            }
+        case 'SELECTED_ELEMENT':
+            return {
+                ...state,
+                editor: {
+                    ...state.editor,
+                    selectedNode: action.payload.element,
                 }
             }
         default:
             return state;
     }
 }
+
+export type EditorContextData = {
+    previewMode: boolean
+    setPreviewMode: (previewMode: boolean) => void
+}
+
+export const EditorContext = createContext<{
+    state: EditorState
+    dispatch: Dispatch<EditorActions>
+}>({
+    state: initialState,
+    dispatch: () => undefined,
+})
+
+type EditorProps = {
+    children: React.ReactNode
+}
+
+const EditorProvider = (props: EditorProps) => {
+    const [state, dispatch] = useReducer(editorReducer, initialState)
+    return (
+        <EditorContext.Provider value={{state,dispatch}} > {props.children}</EditorContext.Provider>
+    )
+}
+
+export const useEditor = ()=>{
+    const context = useContext(EditorContext)
+    if(!context){
+        throw new Error('useEditor Hook must be used within the editor Provider')
+    }return context
+}
+
+export default EditorProvider
