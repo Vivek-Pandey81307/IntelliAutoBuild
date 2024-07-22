@@ -2,6 +2,7 @@ import { EditorCanvasCardType } from '@/lib/types'
 import { useEditor } from '@/providers/editor-provider'
 import { useNodeId } from '@xyflow/react'
 import React, { useMemo } from 'react'
+import EditorCanvasIconHelper from './editor-canvas-icon-helper'
 
 type Props = {}
 
