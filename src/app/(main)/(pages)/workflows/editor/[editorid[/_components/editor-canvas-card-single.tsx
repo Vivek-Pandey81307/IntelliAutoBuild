@@ -13,7 +13,13 @@ const EditorCanvasCardSingle = ({data} : {data : EditorCanvasCardType} )=> {
     return <EditorCanvasIconHelper type={data.type} />
    },[data])
     return (
-    <div>EditorCanvasCardSingle</div>
+        <>
+        {data.type !=='Trigger' && data.type !=='Google Drive' && (
+            <CustomHandle 
+            type='target'
+            position={Position.Top}
+            style = {{zIndex : 100}}/>
+        )}</>
   )
 }
 
