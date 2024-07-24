@@ -1,8 +1,10 @@
+'use client'
 import React, { useMemo } from 'react'
 import { ReactFlow } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { EditorNodeType } from '@/lib/types';
 import { useEditor } from '@/providers/editor-provider';
+import EditorCanvasCardSingle from './editor-canvas-card-single';
 type Props = {}
 
 const initialNodes : EditorNodeType[] = []
