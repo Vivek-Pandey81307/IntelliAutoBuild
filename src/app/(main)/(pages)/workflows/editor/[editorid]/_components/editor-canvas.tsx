@@ -1,6 +1,6 @@
 'use client'
 import React, { useCallback, useMemo, useState } from 'react'
-import { applyEdgeChanges, applyNodeChanges, NodeChange, ReactFlow, ReactFlowInstance, EdgeChange, Edge, Connection, addEdge, Controls, MiniMap } from '@xyflow/react';
+import { applyEdgeChanges, applyNodeChanges, NodeChange, ReactFlow, ReactFlowInstance, EdgeChange, Edge, Connection, addEdge, Controls, MiniMap, Background } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { EditorCanvasCardType, EditorNodeType } from '@/lib/types';
 import { useEditor } from '@/providers/editor-provider';
@@ -82,7 +82,7 @@ const EditorCanvas = (props: Props) => {
                 y: event.clientY,
             })
             const newNode = {
-                
+
                 id: v4(),
                 type,
                 position,
@@ -99,60 +99,65 @@ const EditorCanvas = (props: Props) => {
             setNodes((nds) => nds.concat(newNode))
         },
         [reactFlowInstance, state]
-        
+
     )
 
-const nodeTypes = useMemo(
-    () => ({
-        Action: EditorCanvasCardSingle,
-        Trigger: EditorCanvasCardSingle,
-        Email: EditorCanvasCardSingle,
-        Condition: EditorCanvasCardSingle,
-        AI: EditorCanvasCardSingle,
-        Slack: EditorCanvasCardSingle,
-        'Google Drive': EditorCanvasCardSingle,
-        Notion: EditorCanvasCardSingle,
-        Discord: EditorCanvasCardSingle,
-        'Custom Webhook': EditorCanvasCardSingle,
-        'Google Calendar': EditorCanvasCardSingle,
-        wait: EditorCanvasCardSingle,
-    }), []
-)
-return (
-    <ResizablePanelGroup
-        direction="horizontal"
-        className=""
-    >
-        <ResizablePanel defaultSize={70} >
-            <div className='flex h-full items-center justify-center'>
-                <div
-                    style={{ width: '100%', height: '100%', paddingBottom: '70px' }}
-                    className='relative'>
-                    <ReactFlow
-                        className='w-[300px]'
-                        onDrop={onDrop}
-                        onDragOver={onDragOver}
-                        nodes={state.editor.elements}
-                        edges={edges}
-                        onEdgesChange={onEdgesChange}
-                        onConnect={onConnect}
-                        onInit={setReactFlowInstance}
-                        fitView
-                        onClick={handleClickCanvas}
-                        nodeTypes={nodeTypes}>
-                        <Controls position="top-left" />
-                        <MiniMap
-                            position="bottom-left"
-                            className="!bg-background"
-                            zoomable
-                            pannable
-                        />
-                    </ReactFlow>
+    const nodeTypes = useMemo(
+        () => ({
+            Action: EditorCanvasCardSingle,
+            Trigger: EditorCanvasCardSingle,
+            Email: EditorCanvasCardSingle,
+            Condition: EditorCanvasCardSingle,
+            AI: EditorCanvasCardSingle,
+            Slack: EditorCanvasCardSingle,
+            'Google Drive': EditorCanvasCardSingle,
+            Notion: EditorCanvasCardSingle,
+            Discord: EditorCanvasCardSingle,
+            'Custom Webhook': EditorCanvasCardSingle,
+            'Google Calendar': EditorCanvasCardSingle,
+            wait: EditorCanvasCardSingle,
+        }), []
+    )
+    return (
+        <ResizablePanelGroup
+            direction="horizontal"
+            className=""
+        >
+            <ResizablePanel defaultSize={70} >
+                <div className='flex h-full items-center justify-center'>
+                    <div
+                        style={{ width: '100%', height: '100%', paddingBottom: '70px' }}
+                        className='relative'>
+                        <ReactFlow
+                            className='w-[300px]'
+                            onDrop={onDrop}
+                            onDragOver={onDragOver}
+                            nodes={state.editor.elements}
+                            edges={edges}
+                            onEdgesChange={onEdgesChange}
+                            onConnect={onConnect}
+                            onInit={setReactFlowInstance}
+                            fitView
+                            onClick={handleClickCanvas}
+                            nodeTypes={nodeTypes}>
+                            <Controls position="top-left" />
+                            <MiniMap
+                                position="bottom-left"
+                                className="!bg-background"
+                                zoomable
+                                pannable
+                            />
+                            <Background
+                                //@ts-ignore
+                                variant ="cross"
+                                gap={12} size={1}
+                            />
+                        </ReactFlow>
+                    </div>
                 </div>
-            </div>
-        </ResizablePanel>
-    </ResizablePanelGroup>
-)
+            </ResizablePanel>
+        </ResizablePanelGroup>
+    )
 }
 
 export default EditorCanvas
