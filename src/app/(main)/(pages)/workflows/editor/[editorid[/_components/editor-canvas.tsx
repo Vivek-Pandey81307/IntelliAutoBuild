@@ -1,6 +1,6 @@
 'use client'
-import React, { useMemo } from 'react'
-import { ReactFlow } from '@xyflow/react';
+import React, { useCallback, useMemo, useState } from 'react'
+import { ReactFlow, ReactFlowInstance } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { EditorCanvasCardType, EditorNodeType } from '@/lib/types';
 import { useEditor } from '@/providers/editor-provider';
@@ -11,14 +11,20 @@ import {
     ResizablePanelGroup,
   } from "@/components/ui/resizable"
 import { EditorCanvasDefaultCardTypes } from '@/lib/constant';
-import { toast } from '@/components/ui/use-toast';
-
+import { toast } from 'sonner';
+import { usePathname } from 'next/navigation';
+import {v4} from 'uuid'
 type Props = {}
 
 const initialNodes : EditorNodeType[] = []
 const initialEdges : {id : string ;source : string; target : string}[]=[]
 const EditorCanvas = (props: Props) => {
     const {dispatch,state}  = useEditor()
+    const [nodes, setNodes] = useState(initialNodes)
+    const [reactFlowInstance,setReactFlowInstance] = useState<ReactFlowInstance>()
+    const pathname = usePathname();
+
+    
 
     const onDrop= useCallback(
         (event : any) =>{
