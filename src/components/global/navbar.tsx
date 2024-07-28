@@ -20,7 +20,7 @@ const Navbar = async(props: Props) => {
             className='shadow-sm' />
             <p className='text-3xl font-bold'>AutoBuild</p>
         </aside>
-        <nav className='absolute left-[50%] top-[50%] transform translate-x-[-30%] translate-y-[-25%] hidden md:block'>
+        <nav className='absolute left-[50%] top-[50%] transform translate-x-[-50%] translate-y-[-25%] hidden lg:block '>
             <ul className='flex items-center gap-4 list-none'>
                 <li>
                     <Link  href="#" >Products</Link>
