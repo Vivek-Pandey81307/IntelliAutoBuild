@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { applyEdgeChanges, applyNodeChanges, NodeChange, ReactFlow, ReactFlowInstance, EdgeChange, Edge, Connection, addEdge, Controls, MiniMap, Background } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { EditorCanvasCardType, EditorNodeType } from '@/lib/types';
@@ -103,6 +103,7 @@ const EditorCanvas = (props: Props) => {
         [reactFlowInstance, state]
 
     )
+    useEffect(()=>{dispatch({type:"LOAD_DATA", payload : {edges,elements:nodes}})},[nodes,edges])
 
     const nodeTypes = useMemo(
         () => ({
