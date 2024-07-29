@@ -157,6 +157,7 @@ const EditorCanvas = (props: Props) => {
                             onDragOver={onDragOver}
                             nodes={state.editor.elements}
                             edges={edges}
+                            onNodesChange={onNodeChange}
                             onEdgesChange={onEdgesChange}
                             onConnect={onConnect}
                             onInit={setReactFlowInstance}
@@ -206,7 +207,7 @@ const EditorCanvas = (props: Props) => {
                 ):(
                     <FlowInstance
             edges={edges}
-            nodes={nodes}
+            nodes={nodes} 
           >
             <EditorCanvasSidebar nodes={nodes} />
           </FlowInstance>
