@@ -9,6 +9,7 @@ import { EditorCanvasDefaultCardTypes } from '@/lib/constant'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { onDragStart } from '@/lib/editor-utils'
 import EditorCanvasIconHelper from './editor-canvas-icon-helper'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 type Props = {
     nodes : EditorNodeType[]
@@ -48,6 +49,21 @@ const EditorCanvasSidebar = ({nodes}: Props) => {
             </CardHeader>
           </Card>
         ))}
+      </TabsContent>
+      <TabsContent
+      value='settings'
+      className='-mt-6'>
+        <div className='px-2 py-4 text-center text-xl font-bold'>
+          {state.editor.selectedNode.data.title}
+        </div>
+        <Accordion type="multiple">
+          <AccordionItem
+          value="Options"
+          className="border-y-[1px] px-2">
+            <AccordionTrigger className='!no-underline'>Details</AccordionTrigger>
+            <AccordionContent >Yes .It adheres to the WAI-ARIA design pattern</AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </TabsContent>
       </Tabs></aside>
   )
