@@ -33,9 +33,9 @@ const EditorCanvas = (props: Props) => {
         (params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)), []
     )
     const onEdgesChange = useCallback((changes: EdgeChange[]) =>
-        setEdges((eds) => applyEdgeChanges(changes, eds)), [setEdges]
+        setEdges((eds) => applyEdgeChanges(changes, eds)), [setEdges] 
     )
-    const onNodeChange = useCallback(
+    const onNodesChange = useCallback(
         (changes: NodeChange[]) => {
             //@ts-ignore
             setNodes((nds) => applyNodeChanges(changes, nds))
@@ -157,7 +157,7 @@ const EditorCanvas = (props: Props) => {
                             onDragOver={onDragOver}
                             nodes={state.editor.elements}
                             edges={edges}
-                            onNodesChange={onNodeChange}
+                            onNodesChange={onNodesChange}
                             onEdgesChange={onEdgesChange}
                             onConnect={onConnect}
                             onInit={setReactFlowInstance}
