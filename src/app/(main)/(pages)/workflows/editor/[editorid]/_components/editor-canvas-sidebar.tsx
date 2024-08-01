@@ -5,11 +5,12 @@ import { useEditor } from '@/providers/editor-provider'
 import React from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from '@radix-ui/react-separator'
-import { EditorCanvasDefaultCardTypes } from '@/lib/constant'
+import { CONNECTIONS, EditorCanvasDefaultCardTypes } from '@/lib/constant'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { onDragStart } from '@/lib/editor-utils'
 import EditorCanvasIconHelper from './editor-canvas-icon-helper'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import RenderConnectionAccordion from './render-connection-accordion'
 
 type Props = {
     nodes : EditorNodeType[]
@@ -60,8 +61,12 @@ const EditorCanvasSidebar = ({nodes}: Props) => {
           <AccordionItem
           value="Options"
           className="border-y-[1px] px-2">
-            <AccordionTrigger className='!no-underline'>Details</AccordionTrigger>
-            <AccordionContent >Yes .It adheres to the WAI-ARIA design pattern</AccordionContent>
+            <AccordionTrigger className='!no-underline'>Account</AccordionTrigger>
+            <AccordionContent >
+              {CONNECTIONS.map((connection)=>(
+                <RenderConnectionAccordion key={connection.title} state={state} connection={connection}/>
+              ))}{' '}
+            </AccordionContent>
           </AccordionItem>
         </Accordion>
       </TabsContent>
