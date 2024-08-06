@@ -1,5 +1,6 @@
 'use client'
 import ConnectionCard from '@/app/(main)/(pages)/connections/_components/connection-card'
+import MultipleSelector from '@/components/ui/multiple-selector'
 import { Connection } from '@/lib/types'
 import { useNodeConnections } from '@/providers/connections-provider'
 import { EditorState } from '@/providers/editor-provider'
@@ -44,7 +45,7 @@ const RenderConnectionAccordion = ({ connection, state, }: {
                 <>
                 <div className='mb-4 ml-1'>
                     Select the Slack channels to send notification and messages:</div>
-                    <MultipleSelector 
+                    <MultipleSelector
                     value={selectedSlackChannels}
                     onChange={setSelectedSlackChannels}
                     defaultOptions = {slackChannels}
