@@ -63,9 +63,13 @@ const EditorCanvasSidebar = ({nodes}: Props) => {
           className="border-y-[1px] px-2">
             <AccordionTrigger className='!no-underline'>Account</AccordionTrigger>
             <AccordionContent >
-              {CONNECTIONS.map((connection)=>(
-                <RenderConnectionAccordion key={connection.title} state={state} connection={connection}/>
-              ))}{' '}
+            {CONNECTIONS.map((connection) => (
+                  <RenderConnectionAccordion
+                    key={connection.title}
+                    state={state}
+                    connection={connection}
+                  />
+                ))}
             </AccordionContent>
           </AccordionItem>
         </Accordion>
