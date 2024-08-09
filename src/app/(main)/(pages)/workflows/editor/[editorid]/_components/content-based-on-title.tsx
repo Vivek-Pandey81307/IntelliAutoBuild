@@ -7,6 +7,8 @@ import { ConnectionProviderProps } from '@/providers/connections-provider'
 import { EditorState } from '@/providers/editor-provider'
 import React from 'react'
 import GoogleFileDetails from './google-file-details'
+import GoogleDriveFiles from './google-drive-files'
+import ActionButton from './action-button'
 
 
 export interface Option {
@@ -91,6 +93,14 @@ const ContentBasedOnTitle = ({
                         </CardContent>
                     </Card>
                 )}
+                {title ==='Google Drive' && (
+                    <GoogleDriveFiles />
+                )}
+                <ActionButton
+                currentService = {title}
+                nodeConnection = {nodeConnection}
+                channels = {selectedSlackChannels}
+                setChannels = {setSelectedSlackChannels}/>
             </div>
         </Card>
     </AccordionContent>
