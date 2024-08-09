@@ -11,7 +11,7 @@ import React from 'react'
 
 type Props = {}
 
-const RenderConnectionAccordion = ({ connection, state, }: {
+const RenderConnectionAccordion = ({ connection, state }: {
     connection: Connection
     state: EditorState
 }) => {
@@ -26,7 +26,7 @@ const RenderConnectionAccordion = ({ connection, state, }: {
     
     } = connection
     const {nodeConnection} = useNodeConnections()
-    const {slackChannels,selectedSlackChannels,setSelectedSlackChannels} =useFuzzieStore()
+    const {slackChannels,selectedSlackChannels,setSelectedSlackChannels} = useFuzzieStore()
     const connectionData = (nodeConnection as any )[connectionKey]
     const isConnected = 
     alwaysTrue || 
