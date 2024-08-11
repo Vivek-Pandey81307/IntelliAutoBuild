@@ -62,7 +62,7 @@ const ConnectionCard = ({
           >
             Connect
           </Link>
-       )}
+        )}
       </div>
     </Card>
   )
