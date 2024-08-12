@@ -5,6 +5,8 @@ import ConnectionCard from './_components/connection-card'
 import { currentUser } from '@clerk/nextjs/server'
 import { onDiscordConnect } from './_actions/discord-connection'
 import { getUserData } from './_actions/get-user'
+import { onNotionConnect } from './_actions/notion-connection'
+import { onSlackconnect } from './_actions/slack-conneciton'
 
 type Props = {
   searchParams?: { [key: string]: string | undefined }
@@ -96,7 +98,7 @@ const Connections = async (props: Props) => {
 
     return { ...connections, 'Google Drive': true }
   }
-  const connection = await onUserConnections()
+  const connections = await onUserConnections()
   return (
     <div className='relative flex flex-col gap-4'>
       <h1 className='sticky top-0 z-[10] flex items-center justify-between border-b bg-background/50 p-6 text-4xl backdrop-blur-lg'>Connections</h1>
