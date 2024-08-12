@@ -3,14 +3,16 @@ import { CONNECTIONS } from '@/lib/constant'
 import React from 'react'
 import ConnectionCard from './_components/connection-card'
 import { currentUser } from '@clerk/nextjs/server'
+import { onDiscordConnect } from './_actions/discord-connection'
+import { getUserData } from './_actions/get-user'
 
 type Props = {
-    searchParams? : {[key : string] : string | undefined}
+  searchParams?: { [key: string]: string | undefined }
 }
 
 
 
-const Connections = async(props: Props) => {
+const Connections = async (props: Props) => {
 
   const {
     webhook_id,
@@ -52,11 +54,11 @@ const Connections = async(props: Props) => {
     team_name: '',
   }
   const user = await currentUser()
-  if(!user) return null
-  
+  if (!user) return null
 
-  const onUserConnections = async()=>{
-    await onDiscordConnect{
+
+  const onUserConnections = async () => {
+    await onDiscordConnect(
       channel_id!,
       webhook_id!,
       webhook_name!,
@@ -64,7 +66,7 @@ const Connections = async(props: Props) => {
       user.id,
       guild_name!,
       guild_id!
-    }
+    )
     await onNotionConnect(
       access_token!,
       workspace_id!,
@@ -82,23 +84,35 @@ const Connections = async(props: Props) => {
       team_id!,
       team_name!,
     )
+
+    const connections: any = {}
+    const user_info = await getUserData(user.id)
+
+    user_info?.connections.map((connection) => {
+      connections[connection.type] = true
+      return (connections[connection.type] = true)
+    })
+
+
+    return { ...connections, 'Google Drive': true }
   }
+  const connection = await onUserConnections()
   return (
     <div className='relative flex flex-col gap-4'>
-        <h1 className='sticky top-0 z-[10] flex items-center justify-between border-b bg-background/50 p-6 text-4xl backdrop-blur-lg'>Connections</h1>
-        <div className='relative flex flex-col gap-4'>
-          <section className='flex flex-col gap-4 p-6 text-muted-foreground'>
-            Connect all your apps directly from here. You may need to connect these apps regularly to refresh verification 
-            {/* {CONNECTIONS.map((connection)=>(<ConnectionCard
+      <h1 className='sticky top-0 z-[10] flex items-center justify-between border-b bg-background/50 p-6 text-4xl backdrop-blur-lg'>Connections</h1>
+      <div className='relative flex flex-col gap-4'>
+        <section className='flex flex-col gap-4 p-6 text-muted-foreground'>
+          Connect all your apps directly from here. You may need to connect these apps regularly to refresh verification
+          {CONNECTIONS.map((connection)=>(<ConnectionCard
             key={connection.title}
             description={connection.description}
             icon={connection.image}
             type = {connection.title}
             title={connection.title}
-            //connected={connections}
-            />))} */}
-          </section>
-        </div>
+            connected={connections}
+            />))}
+        </section>
+      </div>
     </div>
   )
 }
