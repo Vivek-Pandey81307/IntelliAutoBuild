@@ -89,7 +89,7 @@ const editorReducer = (state: EditorState = initialState, action: EditorActions)
                     }
                 }
                 return undoState
-            }return state
+            } return state
 
         case 'LOAD_DATA':
             return {
@@ -133,15 +133,15 @@ type EditorProps = {
 const EditorProvider = (props: EditorProps) => {
     const [state, dispatch] = useReducer(editorReducer, initialState)
     return (
-        <EditorContext.Provider value={{state,dispatch}} > {props.children}</EditorContext.Provider>
+        <EditorContext.Provider value={{ state, dispatch }} > {props.children}</EditorContext.Provider>
     )
 }
 
-export const useEditor = ()=>{
+export const useEditor = () => {
     const context = useContext(EditorContext)
-    if(!context){
+    if (!context) {
         throw new Error('useEditor Hook must be used within the editor Provider')
-    }return context
+    } return context
 }
 
 export default EditorProvider
