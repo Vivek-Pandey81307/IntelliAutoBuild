@@ -36,10 +36,10 @@ export async function GET (req : NextRequest){
             });
             const databaseId  = databasesPages?.results?.length?databasesPages.results[0].id : '';
             return  NextResponse.redirect(
-                `https://localhost:3000/connections?access_token=${response.data.access_token}&
+                `https://intelliautobuild.vercel.app/connections?access_token=${response.data.access_token}&
                 workspace_name=${response.data.workspace_name}&workspace_icon=${response.data.workspace_icon}&workspace_id=${response.data.workspace_id}&database_id=${databaseId}`
             );
         }
     }
-    return NextResponse.redirect('https://localhost:3000/connections');
+    return NextResponse.redirect('https://intelliautobuild.vercel.app/connections');
 }

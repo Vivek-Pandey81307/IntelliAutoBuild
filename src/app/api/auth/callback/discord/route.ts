@@ -30,9 +30,9 @@ export async function GET( req : NextRequest){
                 (guild : any ) => guild.id == output.data.webhook.guild_id
             )
             return NextResponse.redirect(
-                `https://localhost:3000/connections?webhook_id=${output.data.webhook.id}&webhook_url=${output.data.webhook.url}&webhook_name=${output.data.webhook.name}&guild_id=${output.data.webhook.guild_id}&guild_name=${UserGuild[0].name}&channel_id=${output.data.webhook.channel_id}`
+                `https://intelliautobuild.vercel.app/connections?webhook_id=${output.data.webhook.id}&webhook_url=${output.data.webhook.url}&webhook_name=${output.data.webhook.name}&guild_id=${output.data.webhook.guild_id}&guild_name=${UserGuild[0].name}&channel_id=${output.data.webhook.channel_id}`
             )
         }
-        return NextResponse.redirect('https://localhosta:3000/connections')
+        return NextResponse.redirect('https://intelliautobuild.vercel.app/connections')
     }
 }
