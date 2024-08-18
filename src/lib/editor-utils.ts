@@ -6,11 +6,9 @@ import {
   getNotionConnection,
   getNotionDatabase,
 } from '@/app/(main)/(pages)/connections/_actions/notion-connection'
-import {
-  getSlackConnection,
-  listBotChannels,
-} from '@/app/(main)/(pages)/connections/_actions/slack-connection'
+
 import { Option } from '@/components/ui/multiple-selector'
+import { getSlackConnection, listBotChannels } from '@/app/(main)/(pages)/connections/_actions/slack-conneciton'
 
 export const onDragStart = (
   event: any,
@@ -146,7 +144,7 @@ export const fetchBotSlackChannels = async (
   token: string,
   setSlackChannels: (slackChannels: Option[]) => void
 ) => {
-  await listBotChannels(token)?.then((channels) => setSlackChannels(channels))
+  await listBotChannels(token)?.then((channels  : any) => setSlackChannels(channels))
 }
 
 export const onNotionContent = (
