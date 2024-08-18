@@ -7,7 +7,7 @@ import { postContentToWebHook } from '@/app/(main)/(pages)/connections/_actions/
 import { toast } from 'sonner'
 import { onCreateNewPageInDatabase } from '@/app/(main)/(pages)/connections/_actions/notion-connection'
 import { onCreateNodeTemplate } from '../../../_actions/workflows-connection'
-import { postMessageToSlack } from '@/app/(main)/(pages)/connections/_actions/slack-conneciton'
+import { postMessageToSlack } from '@/app/(main)/(pages)/connections/_actions/slack-connection'
 
 type Props = {
   currentService: string

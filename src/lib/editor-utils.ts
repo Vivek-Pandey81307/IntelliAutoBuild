@@ -8,7 +8,7 @@ import {
 } from '@/app/(main)/(pages)/connections/_actions/notion-connection'
 
 import { Option } from '@/components/ui/multiple-selector'
-import { getSlackConnection, listBotChannels } from '@/app/(main)/(pages)/connections/_actions/slack-conneciton'
+import { getSlackConnection, listBotChannels } from '@/app/(main)/(pages)/connections/_actions/slack-connection'
 
 export const onDragStart = (
   event: any,

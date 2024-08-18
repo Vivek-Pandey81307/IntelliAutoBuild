@@ -6,7 +6,7 @@ import { currentUser } from '@clerk/nextjs/server'
 import { onDiscordConnect } from './_actions/discord-connection'
 import { getUserData } from './_actions/get-user'
 import { onNotionConnect } from './_actions/notion-connection'
-import { onSlackconnect } from './_actions/slack-connection'
+import { onSlackConnect } from './_actions/slack-connection'
 
 type Props = {
   searchParams?: { [key: string]: string | undefined }
@@ -77,7 +77,7 @@ const Connections = async (props: Props) => {
       database_id!,
       user.id
     )
-    await onSlackconnect(
+    await onSlackConnect(
       app_id!,
       authed_user_id!,
       authed_user_token!,
