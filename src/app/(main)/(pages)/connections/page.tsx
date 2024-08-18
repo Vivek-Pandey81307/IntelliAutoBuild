@@ -6,7 +6,7 @@ import { currentUser } from '@clerk/nextjs/server'
 import { onDiscordConnect } from './_actions/discord-connection'
 import { getUserData } from './_actions/get-user'
 import { onNotionConnect } from './_actions/notion-connection'
-import { onSlackconnect } from './_actions/slack-conneciton'
+import { onSlackconnect } from './_actions/slack-connection'
 
 type Props = {
   searchParams?: { [key: string]: string | undefined }
