@@ -2,7 +2,7 @@
 import { EditorCanvasCardType, EditorNodeType } from '@/lib/types'
 import { useEditor } from '@/providers/editor-provider'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import  {
+import ReactFlow, {
   Background,
   Connection,
   Controls,
@@ -14,8 +14,7 @@ import  {
   applyNodeChanges,
   applyEdgeChanges,
   addEdge,
-  ReactFlow,
-} from '@xyflow/react'
+} from 'reactflow'
 import 'reactflow/dist/style.css'
 import EditorCanvasCardSingle from './editor-canvas-card-single'
 import {
@@ -29,7 +28,7 @@ import { v4 } from 'uuid'
 import { EditorCanvasDefaultCardTypes } from '@/lib/constant'
 import FlowInstance from './flow-instance'
 import EditorCanvasSidebar from './editor-canvas-sidebar'
-import { onGetNodesEdges } from '../../../_actions/workflows-connection'
+import { onGetNodesEdges } from '../../../_actions/workflow-connections'
 
 type Props = {}
 
@@ -108,7 +107,6 @@ const EditorCanvas = (props: Props) => {
         position,
         data: {
           title: type,
-          // @ts-ignore
           description: EditorCanvasDefaultCardTypes[type].description,
           completed: false,
           current: false,
@@ -208,7 +206,6 @@ const EditorCanvas = (props: Props) => {
                 </svg>
               </div>
             ) : (
-                // @ts-ignore
               <ReactFlow
                 className="w-[300px]"
                 onDrop={onDrop}
