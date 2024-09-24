@@ -59,7 +59,7 @@ const EditorCanvasIconHelper = ({type}:Props) =>{
                 className='flex-shrink-0'
                 size={30}/>
             )
-        case 'Google Calendar' : 
+        case 'Google Calender' : 
             return  (
                 <Calendar 
                 className='flex-shrink-0'
