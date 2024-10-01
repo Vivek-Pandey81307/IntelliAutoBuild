@@ -13,19 +13,24 @@ export async function GET() {
 
   const { userId } = auth()
   if (!userId) {
-    return NextResponse.json({ message: 'User not found' })
+    return NextResponse.json({ message: 'User not found' }, { status: 404 })
   }
 
-  const clerkResponse = await clerkClient.users.getUserOauthAccessToken(
-    userId,
-    'oauth_google'
-  )
+  const clerkResponse = await clerkClient.users.getUserOauthAccessToken(userId, 'oauth_google')
+  
 
   //@ts-ignore
-  const accessToken = clerkResponse[0].token
-  oauth2Client.setCredentials({
-    access_token: accessToken,
-  })
+  if (!clerkResponse || !clerkResponse.length) {
+    return NextResponse.json({ message: 'No OAuth token found' }, { status: 400 })
+  }
+  
+  //@ts-ignore
+  const accessToken = clerkResponse[0]?.token
+  if (!accessToken) {
+    return NextResponse.json({ message: 'Failed to get access token' }, { status: 500 })
+  }
+
+  oauth2Client.setCredentials({ access_token: accessToken })
 
   const drive = google.drive({
     version: 'v3',
@@ -34,40 +39,40 @@ export async function GET() {
   
   const channelId = uuidv4()
 
-  const startPageTokenRes = await drive.changes.getStartPageToken({})
-  const startPageToken = startPageTokenRes.data.startPageToken
-  if (startPageToken == null) {
-    throw new Error('startPageToken is unexpectedly null')
-  }
+  try {
+    const startPageTokenRes = await drive.changes.getStartPageToken({})
+    const startPageToken = startPageTokenRes.data.startPageToken
+    if (!startPageToken) {
+      throw new Error('startPageToken is unexpectedly null')
+    }
 
-  const listener = await drive.changes.watch({
-    pageToken: startPageToken,
-    supportsAllDrives: true,
-    supportsTeamDrives: true,
-    requestBody: {
-      id: channelId,
-      type: 'web_hook',
-      address:
-        `https://intelliautobuild.vercel.app/api/drive-activity/notification`,
-      kind: 'api#channel',
-    },
-  })
-
-  if (listener.status == 200) {
-    //if listener created store its channel id in db
-    const channelStored = await db.user.updateMany({
-      where: {
-        clerkId: userId,
-      },
-      data: {
-        googleResourceId: listener.data.resourceId,
+    const listener = await drive.changes.watch({
+      pageToken: startPageToken,
+      supportsAllDrives: true,
+      supportsTeamDrives: true,
+      requestBody: {
+        id: channelId,
+        type: 'web_hook',
+        address: 'https://intelliautobuild.vercel.app/api/drive-activity/notification',
+        kind: 'api#channel',
       },
     })
 
-    if (channelStored) {
-      return new NextResponse('Listening to changes...')
+    if (listener.status === 200) {
+      const channelStored = await db.user.update({
+        where: { clerkId: userId },
+        data: { googleResourceId: listener.data.resourceId },
+      })
+
+      if (channelStored) {
+        return NextResponse.json({ message: 'Listening to changes...' })
+      }
     }
+  } catch (error) {
+    console.error('Error:', error)
+    //@ts-ignore
+    return NextResponse.json({ message: 'Something went wrong', error: error.message }, { status: 500 })
   }
 
-  return new NextResponse('Oops! something went wrong, try again')
+  return NextResponse.json({ message: 'Oops! something went wrong, try again' })
 }
