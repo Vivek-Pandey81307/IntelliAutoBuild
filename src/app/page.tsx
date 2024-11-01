@@ -55,7 +55,7 @@ export default function Home() {
                 className="text-xl font-bold text-neutral-600 dark:text-white "
               >
                 Hobby
-                <h2 className="text-6xl ">₹0</h2>
+                <h2 className="text-4xl ">₹0</h2>
               </CardItem>
               <CardItem
                 translateZ="60"
@@ -102,7 +102,7 @@ export default function Home() {
                 className="text-xl font-bold text-neutral-600 dark:text-white "
               >
                 Pro Plan
-                <h2 className="text-6xl ">₹2499.99</h2>
+                <h2 className="text-4xl ">₹2499.99</h2>
               </CardItem>
               <CardItem
                 translateZ="60"
@@ -149,7 +149,7 @@ export default function Home() {
                 className="text-xl font-bold text-neutral-600 dark:text-white "
               >
                 Unlimited
-                <h2 className="text-6xl ">₹9999.99</h2>
+                <h2 className="text-4xl ">₹9999.99</h2>
               </CardItem>
               <CardItem
                 translateZ="60"
