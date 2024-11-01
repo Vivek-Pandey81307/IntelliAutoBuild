@@ -1,7 +1,7 @@
 'use server'
 
 import { db } from '@/lib/db'
-import { currentUser } from '@clerk/nextjs/server'
+import { currentUser } from '@clerk/nextjs'
 import axios from 'axios'
 
 export const onDiscordConnect = async (

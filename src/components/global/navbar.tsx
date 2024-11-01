@@ -2,8 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { MenuIcon } from 'lucide-react'
-import {  currentUser } from '@clerk/nextjs/server'
-import { UserButton } from '@clerk/nextjs'
+import { UserButton, currentUser } from '@clerk/nextjs'
 
 type Props = {}
 
@@ -14,10 +13,10 @@ const Navbar = async (props: Props) => {
       <aside className="flex items-center gap-[2px]">
         <p className="text-3xl font-bold">Intelli</p>
         <Image
-          src="/IntelliLogo.png"
+          src="/Logo.png"
           width={15}
           height={15}
-          alt="IntelliAutoBuild logo"
+          alt="logo"
           className="shadow-sm"
         />
         <p className="text-3xl font-bold">AutoBuild</p>

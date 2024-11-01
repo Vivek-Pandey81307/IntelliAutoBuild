@@ -1,48 +1,27 @@
-import {
-  clerkMiddleware,
-  createRouteMatcher
-} from '@clerk/nextjs/server';
+import { authMiddleware } from '@clerk/nextjs'
 
-const ignoredRoutes = [
-  '/api/auth/callback/discord',
-  '/api/auth/callback/notion',
-  '/api/auth/callback/slack',
-  '/api/flow',
-  '/api/cron/wait',
-];
-
-const publicRoutes = [
-  '/',
-  '/api/clerk-webhook',
-  '/api/drive-activity/notification',
-  '/api/payment/success',
-];
-
-const isProtectedRoute = createRouteMatcher([
-  '/dashboard(.*)',
-  '/forum(.*)',
-]);
-
-const isIgnoredRoute = createRouteMatcher(ignoredRoutes);
-const isPublicRoute = createRouteMatcher(publicRoutes);
-
-export default clerkMiddleware((auth, req) => {
-  // Skip authentication for ignored routes
-  if (isIgnoredRoute(req)) {
-    return;
-  }
-
-  // Allow access to public routes
-  if (isPublicRoute(req)) {
-    return;
-  }
-
-  // Protect routes if they match the protected routes pattern
-  if (isProtectedRoute(req)) {
-    auth().protect();
-  }
-});
+export default authMiddleware({
+  publicRoutes: [
+    '/',
+    '/api/clerk-webhook',
+    '/api/drive-activity/notification',
+    '/api/payment/success',
+  ],
+  ignoredRoutes: [
+    '/api/auth/callback/discord',
+    '/api/auth/callback/notion',
+    '/api/auth/callback/slack',
+    '/api/flow',
+    '/api/cron/wait',
+  ],
+})
 
 export const config = {
-  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
-};
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
+}
+
+// https://www.googleapis.com/auth/userinfo.email
+// https://www.googleapis.com/auth/userinfo.profile
+// https://www.googleapis.com/auth/drive.activity.readonly
+// https://www.googleapis.com/auth/drive.metadata
+// https://www.googleapis.com/auth/drive.readonly
