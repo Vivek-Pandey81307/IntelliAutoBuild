@@ -36,7 +36,7 @@ export const SubscriptionCard = ({ onPayment, products, tier }: Props) => {
                   : product.nickname == 'Pro'
                   ? 'Experience a monthly surge of credits to supercharge your automation efforts. Ideal for small to medium-sized projects seeking consistent support.'
                   : product.nickname == 'Free' &&
-                    "Get a monthly wave of credits to automate your tasks with ease. Perfect for starters looking to dip their toes into IntelliAutoBuild's automation capabilities."}
+                    "Get a monthly wave of credits to automate your tasks with ease. Perfect for starters looking to dip their toes into Fuzzie's automation capabilities."}
               </CardDescription>
               <div className="flex justify-between">
                 <p>
@@ -51,8 +51,8 @@ export const SubscriptionCard = ({ onPayment, products, tier }: Props) => {
                   {product.nickname == 'Free'
                     ? 'Free'
                     : product.nickname == 'Pro'
-                    ? '29.99'
-                    : product.nickname == 'Unlimited' && '99.99'}
+                    ? '2,499.99'
+                    : product.nickname == 'Unlimited' && '9,999.99'}
                   /mo
                 </p>
               </div>

@@ -1,5 +1,7 @@
-//@ts-ignore
-import {clerkMiddleware,createRouteMatcher} from '@clerk/nextjs/server';
+import {
+  clerkMiddleware,
+  createRouteMatcher
+} from '@clerk/nextjs/server';
 
 const ignoredRoutes = [
   '/api/auth/callback/discord',

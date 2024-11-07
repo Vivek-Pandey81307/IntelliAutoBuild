@@ -37,9 +37,15 @@ const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   ) => {
     if (modal) {
       if (fetchData) {
-        //@ts-ignore
-        setData({ ...data, ...(await fetchData()) } || {})
+        try {
+          const result = await fetchData() || {};
+          setData({ ...data, ...result });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          // Optionally handle errors by setting a default state or a specific error state
+        }
       }
+      
       setShowingModal(modal)
       setIsOpen(true)
     }
